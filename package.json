@@ -1,0 +1,24 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "debug": "nodemon --inspect src/index.js",
+    "server": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "migrate-mongo": "^8.1.4",
+    "mongoose": "^5.11.18",
+    "path": "^0.12.7"
+  }
+}
