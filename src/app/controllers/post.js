@@ -45,6 +45,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/search', async (req, res) => {
+    try {
+        const search = { title: RegExp(req.query.q, 'i') };
+        const post = await Post.find(search).populate('user');
+
+        return res.status(200).json(post);
+    } catch (err) {
+        return res.status(400).json({ message: 'Erro ao pesquisar post(s)' });
+    }
+});
+
+
 router.get('/:id', async (req, res) => {
     try {
         const post = await Post.findById(req.params.id).populate('user');
