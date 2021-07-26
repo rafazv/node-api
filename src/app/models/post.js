@@ -21,14 +21,7 @@ const PostSchema = new mongoose.Schema({
     updated: {
         type: Date
     },
-});
-
-PostSchema.methods.toJSON = function () {
-    const obj = this.toObject();
-    delete obj.__v;
-
-    return obj;
-};
+}, { versionKey: false });
 
 const Post = mongoose.model('Post', PostSchema);
 

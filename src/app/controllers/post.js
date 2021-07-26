@@ -47,7 +47,10 @@ router.get('/', async (req, res) => {
 
 router.get('/search', async (req, res) => {
     try {
-        const search = { title: RegExp(req.query.q, 'i') };
+        const search = { $or: [
+            { title: RegExp(req.query.q, 'i') },
+            { content: RegExp(req.query.q, 'i') }
+        ] };
         const post = await Post.find(search).populate('user');
 
         return res.status(200).json(post);
@@ -86,7 +89,7 @@ router.put('/:id', async (req, res) => {
             return res.status(401).json({ message: 'Usuário não autorizado' })
 
         const newPost = await Post.findByIdAndUpdate(req.params.id, 
-            req.body, { new: true });
+            { ...req.body, updated: Date.now() }, { new: true });
 
         const { title, content } = newPost;
 

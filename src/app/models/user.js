@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
         default: Date.now,
         select: false
     },
-});
+}, { versionKey: false });
 
 UserSchema.pre('save', async function(next) {
     const hash = await bcrypt.hash(this.password, 10);
@@ -33,13 +33,6 @@ UserSchema.pre('save', async function(next) {
 
     next();
 });
-
-UserSchema.methods.toJSON = function () {
-    const obj = this.toObject();
-    delete obj.__v;
-
-    return obj;
-};
 
 module.exports = {
     model: mongoose.model('User', UserSchema),
